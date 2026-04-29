@@ -1,4 +1,4 @@
-# Gerenciador de Tarefas - Task Manager - Java Console
+# Task Manager - Java Console
 Projeto simples de gerenciamento de tarefas desenvolvido em Java, rodando no console.
 
 ## 🚀 Funcionalidades
