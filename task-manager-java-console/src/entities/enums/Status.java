@@ -1,7 +1,7 @@
 package entities.enums;
 
 public enum Status {
-	NAO_INICIADA,
-	PENDENTE,
-	CONCLUIDA
+	NOT_STARTED,
+	PENDING,
+	COMPLETED
 }

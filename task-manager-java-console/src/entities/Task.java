@@ -1,18 +1,18 @@
 package entities;
 import entities.enums.Status;
 
-public class Tarefa {
+public class Task {
 	
 	private int id;
-	private String titulo;
+	private String title;
 	private Status status;
 	
-	public Tarefa(){
+	public Task(){
 	}
 	
-	public Tarefa(int id, String titulo, Status status) {
+	public Task(int id, String title, Status status) {
 		this.id = id;
-		this.titulo = titulo;
+		this.title = title;
 		this.status = status;
 	}
 	
@@ -24,12 +24,12 @@ public class Tarefa {
 		this.id = id;
 	}
 
-	public String getTitulo() {
-		return titulo;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public Status getStatus() {
@@ -42,7 +42,7 @@ public class Tarefa {
 
 	@Override
 	public String toString() {
-		return "[" + id + "] " + titulo + " - " + status;
+		return "[" + id + "] " + title + " - " + status;
 	}
 	
 }

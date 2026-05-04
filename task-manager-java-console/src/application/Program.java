@@ -1,121 +1,119 @@
 package application;
 
-import java.util.Scanner;
-
-import entities.Tarefa;
+import entities.Task;
 import entities.enums.Status;
-import services.Servico;
+import java.util.Scanner;
+import services.Service;
 
 public class Program 
 {
 	public static void main (String[] args) 
 	{
-		
 		Scanner sc = new Scanner(System.in);
 		
-		int escolha = 5, id = 1;
-		char resp;
+		int choice = 5, id = 1;
+		char answer;
 		
-		Servico servico = new Servico();
+		Service service = new Service();
 		
-		System.out.println("Sistema de Tarefas iniciado  \n");
-		while (escolha != 0) 
+		System.out.println("Task manager started  \n");
+		while (choice != 0) 
 		{
 			
-			System.out.println("Ações disponíveis ->");
-			System.out.println("1 - Criar tarefa \n2 - Listar tarefa \n3 - Atualizar tarefa \n4 - Deletar tarefa \n0 - Sair\n");
-			System.out.print("Digite um valor para realizar a determinada ação: ");
-			escolha = sc.nextInt();
+			System.out.println("Available actions ->");
+			System.out.println("1 - Create task \n2 - List tasks \n3 - Update task \n4 - Delete task \n0 - Exit\n");
+			System.out.print("Enter a value to perform an action: ");
+			choice = sc.nextInt();
 			System.out.println();
 			
-			switch (escolha) 
+			switch (choice) 
 			{
 				case 1 :
 					
-					System.out.print("Digite o título da tarefa: ");
+					System.out.print("Enter the task's title: ");
 					sc.nextLine();
-					String titulo = sc.nextLine().trim();
+					String title = sc.nextLine().trim();
 
-					while (titulo.isEmpty()) 
+					while (title.isEmpty()) 
 					{
-					    System.out.print("Título inválido! Digite novamente: ");
-					    titulo = sc.nextLine().trim();
+					    System.out.print("Invalid title! Try again: ");
+					    title = sc.nextLine().trim();
 					}
 
-					servico.criarTarefa(titulo);
+					service.createTask(title);
 					break;
 			
 				case 2 :
 					
-					servico.listarTarefas();
+					service.listTasks();
 					break;
 				
 				case 3 :
 					
-					System.out.println("Digite o ID da ta tarefa: ");
-					int idDigitado = sc.nextInt();
+					System.out.println("Enter the task ID : ");
+					int typedID = sc.nextInt();
 
-					Tarefa t = servico.buscarPorId(idDigitado);
+					Task t = service.findById(typedID);
 
 					if (t == null) 
 					{
-					    System.out.println("Tarefa não encontrada!");
+					    System.out.println("Task not found!");
 					} 
 					else 
 					{
-					    System.out.println("Tarefa encontrada:");
+					    System.out.println("Task found:");
 					    System.out.println(t);
 
-					    System.out.print("Deseja alterar o título? (s/n): ");
-					    resp = sc.next().charAt(0);
+					    System.out.print("Do you want to change the title? (y/n): ");
+					    answer = sc.next().charAt(0);
 
-					    if (resp == 's') 
+					    if (answer == 'y') 
 					    {
 					        sc.nextLine();
-					        System.out.print("Digite o novo título: ");
-					        titulo = sc.nextLine().trim();
+					        System.out.print("Enter new title: ");
+					        title = sc.nextLine().trim();
 
-					        while (titulo.isEmpty()) 
+					        while (title.isEmpty()) 
 					        {
-					            System.out.print("Título inválido! Digite novamente: ");
-					            titulo = sc.nextLine().trim();
+					            System.out.print("Invalid title! Try again: ");
+					            title = sc.nextLine().trim();
 					        }
 
-					        servico.atualizarTitulo(idDigitado, titulo);
+					        service.updateTitle(typedID, title);
 					    }
 					    
-					    System.out.print("Deseja alterar o status? (s/n): ");
-					    resp = sc.next().charAt(0);
+					    System.out.print("Do you want to change the status? (y/n): ");
+					    answer = sc.next().charAt(0);
 					    
-					    if (resp == 's') 
+					    if (answer == 'y') 
 					    {
-					    	System.out.println("Opções disponíveis: ");
-					        System.out.println("1 - NÃO INICIADA");
-					        System.out.println("2 - PENDENTE");
-					        System.out.println("3 - CONCLUÍDA");
-					    	System.out.print("Digite o número da opção desejada: ");
+					    	System.out.println("Available options: ");
+					        System.out.println("1 - NOT STARTED");
+					        System.out.println("2 - PENDING");
+					        System.out.println("3 - COMPLETED");
+					    	System.out.print("Enter the number of the desired option: ");
 
-					        int opcaoStatus = sc.nextInt();
+					        int statusOption = sc.nextInt();
 					        
-					        Status novoStatus = null;
+					        Status newStatus = null;
 
-					        switch (opcaoStatus) 
+					        switch (statusOption) 
 					        {
 					            case 1:
-					                novoStatus = Status.NAO_INICIADA;
+					                newStatus = Status.NOT_STARTED;
 					                break;
 					            case 2:
-					                novoStatus = Status.PENDENTE;
+					                newStatus = Status.PENDING;
 					                break;
 					            case 3:
-					                novoStatus = Status.CONCLUIDA;
+					                newStatus = Status.COMPLETED;
 					                break;
 					            default:
-					                System.out.println("Opção inválida!");					   
+					                System.out.println("Invalid option!");					   
 					        }
 					        
-					        if (novoStatus != null) {
-					            servico.atualizarStatus(idDigitado, novoStatus);
+					        if (newStatus != null) {
+					            service.updateStatus(typedID, newStatus);
 					        }
 					    }
 					}
@@ -123,38 +121,38 @@ public class Program
 					
 				case 4 :
 					
-					System.out.print("Digite o ID da tarefa: ");
+					System.out.print("Enter the task ID: ");
 					id = sc.nextInt();
 
-					t = servico.buscarPorId(id);
+					t = service.findById(id);
 
 					if (t == null) {
-					    System.out.println("Tarefa não encontrada!");
+					    System.out.println("Task not found!");
 					} else {
-					    System.out.println("Tarefa encontrada:");
+					    System.out.println("Tasks found:");
 					    System.out.println(t);
 
-					    System.out.print("Tem certeza? (s/n): ");
-					    resp = sc.next().charAt(0);
+					    System.out.print("Are you sure? (y/n): ");
+					    answer = sc.next().charAt(0);
 
-					    if (resp == 's') {
-					        servico.deletarTarefa(id);
-					        System.out.println("Tarefa deletada!");
+					    if (answer == 'y') {
+					        service.deleteTask(id);
+					        System.out.println("Task deleted!");
 					    }
 					}
 					break;
 					
 				case 0 :
 					
-					System.out.print("Saindo...");
+					System.out.print("Exiting...");
 					break;
 				
 				default:
-					System.out.println("Opção inválida!");
+					System.out.println("Invalid option!");
 			}
 		}
 		
-		System.out.println("\nPrograma encerrado");
+		System.out.println("\nProgram closed.");
 		
 		sc.close();
 	}

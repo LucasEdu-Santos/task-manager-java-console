@@ -1,52 +1,83 @@
 # Task Manager - Java Console
-Projeto simples de gerenciamento de tarefas desenvolvido em Java, rodando no console.
+A simple task management project built in Java, running on the console.
 
-## 🚀 Funcionalidades
+## 🚀 Features
 
-- Criar tarefa
-- Listar tarefas
-- Atualizar título
-- Atualizar status
-- Deletar tarefa
+- Create task
+- List tasks
+- Update title
+- Update status
+- Delete task
 
-## 🧠 Conceitos aplicados
+## 🧠 Concepts applied
 
-- Programação Orientada a Objetos (POO)
-- Separação de responsabilidades (Service / Application)
-- Enum para controle de status
-- Validação de entrada
-- CRUD completo
+- Object-Oriented Programming (OOP)
+- Separation of concerns (Service / DAO / Application)
+- Enum for status control
+- Input validation
+- Full CRUD
+- MySQL databsae integration with JDBC
+- DAO pattern (Data Access Object)
 
-## 🛠 Tecnologias
+## 🛠 Tech stack
 
 - Java
+- MySQL
+- JDBC
 - Git
 - GitHub
 
-## ▶️ Como executar
+## ▶️ How to run
 
-### Requisitos
+### Requirements
 
-- Java JDK instalado
-- Uma IDE Java (Eclipse, IntelliJ ou VS Code)
+- Java JDK installed
+- MySQL server running locally
+- A Java IDE (Eclipse, IntelliJ or VS Code)
+- MySQL Connector/J driver (`.jar`) added to the project classpath
 
-### Passos
+### Database setup
 
-1. Clone o repositório
+1. Open your MySQL client and run:
+
+```sql
+CREATE DATABASE task_manager;
+USE task_manager;
+
+CREATE TABLE tasks (
+    id     INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    title  VARCHAR(255) NOT NULL,
+    status ENUM('NOT_STARTED', 'PENDING', 'COMPLETED') NOT NULL DEFAULT 'NOT_STARTED'
+);
+```
+
+2. Open `src/db/Connector.java` and set your MySQL credentials:
+
+```java
+private static final String URL      = "jdbc:mysql://localhost:3306/task_manager";
+private static final String USER     = "root";
+private static final String PASSWORD = "your_password_here";
+```
+
+### Steps
+
+1. Clone the repository
 
 ```bash
 git clone https://github.com/LucasEdu-Santos/task-manager-java-console.git
 ```
 
-2. Abra o projeto na sua IDE
+2. Open the project in your IDE
 
-3. Execute a classe `Program.java`
+3. Add the MySQL Connector/J `.jar` to the project classpath
 
-4. Utilize o menu no console para gerenciar as tarefas
+4. Set up the database following steps above
 
-## 📌 Melhorias futuras
+5. Run the `Program.java` class
 
-- Persistência em arquivo
-- Integração com banco de dados
-- API REST com Spring Boot
-- Interface gráfica
+6. Use the console menu to manage your tasks
+
+## 📌 Future improvements
+
+- REST API with Spring Boot
+- Graphical user interface
