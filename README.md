@@ -16,7 +16,7 @@ A simple task management project built in Java, running on the console.
 - Enum for status control
 - Input validation
 - Full CRUD
-- MySQL databsae integration with JDBC
+- MySQL database integration with JDBC
 - DAO pattern (Data Access Object)
 
 ## 🛠 Tech stack
